@@ -11,7 +11,7 @@ import Bookmark from "./Bookmark/index"
 const RightHeader = () => {
   const [active, setActive] = useState()
   return (
-    <div className="simple-list nav-right col-6 pull-right right-header p-0">
+    <div className="simple-list nav-right col-1 pull-right right-header p-0">
     <UL attrUL={{className:"  nav-menus"}} >
       {/* <SearchBar />
       <Bookmark/>

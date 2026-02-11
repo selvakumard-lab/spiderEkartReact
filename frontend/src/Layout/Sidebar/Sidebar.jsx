@@ -1,6 +1,7 @@
 import { Fragment, useContext, useEffect, useState } from "react";
 import CustomizerContext from "../../Helper/Customizer";
 import { MENU } from "./Menu";
+import { TenantMENU } from "./TenantMenu";
 import SidebarIcon from "./SidebarIcon";
 import SimpleBar from "simplebar-react";
 import { ArrowLeft, ArrowRight } from "react-feather";
@@ -58,6 +59,15 @@ const Sidebar = () => {
       setRightArrow(false);
     }
   };
+
+
+  const userData = JSON.parse(localStorage.getItem("user"));
+  const slug = userData?.project_slug;
+
+  const ACTIVE_MENU = userData?.role === "client" ? TenantMENU(slug) : MENU;
+
+
+
   return (
     <div className={`sidebar-wrapper ${togglSidebar ? "close_icon" : ""} `} id="sidebar-wrapper">
       <div>
@@ -70,13 +80,15 @@ const Sidebar = () => {
             <ul className="sidebar-links" style={{ display: "block" }} id="simple-bar">
               <SimpleBar style={{ height: "300px" }}>
                 <BackBtn/>
-                {MENU.map((item, i) => (
+
+                {ACTIVE_MENU.map((item, i) => (
                   <Fragment key={i}>
                     <li className={item.className}>
                       <SidebarSubMenu menu={item.menu} isOpen={isOpen} setIsOpen={setIsOpen} level={0} />
                     </li>
                   </Fragment>
                 ))}
+
               </SimpleBar>
             </ul>
           </div>

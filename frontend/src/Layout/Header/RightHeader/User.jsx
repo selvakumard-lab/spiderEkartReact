@@ -37,19 +37,13 @@ const Users = () => {
       </div>
       <UL attrUL={{ className: "profile-dropdown onhover-show-div" }}>
         <LI>
-          <Link to={`${process.env.PUBLIC_URL}/users/user-profile`}>
+          <Link to={`/users/user-profile`}>
             <User />
             <span>{Account}</span>
           </Link>
         </LI>
         <LI>
-          <Link to={`${process.env.PUBLIC_URL}/email-app`}>
-            <Inbox />
-            <span>Inbox</span>
-          </Link>
-        </LI>
-        <LI>
-          <Link to={`${process.env.PUBLIC_URL}/users/user-edit`}>
+          <Link to={`/users/user-edit`}>
             <i>
               <Settings />
             </i>
