@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Inbox, LogIn, Settings, User } from "react-feather";
-import { Link, useNavigate } from "react-router-dom";
+
+import { LogIn, Settings, User } from "react-feather";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { LI, UL } from "../../../AbstractElements";
-import { Account, LogOut } from "../../../Constant";
+import { Account } from "../../../Constant";
 const Users = () => {
   const [toggle, setToogle] = useState(true);
   // const history = useNavigate();
@@ -16,6 +17,8 @@ const Users = () => {
 
   const navigate = useNavigate();
 
+  const { tenantSlug } = useParams();
+
   const Logout = () => {
     // 1️⃣ Clear localStorage
     localStorage.removeItem("token");
@@ -24,7 +27,11 @@ const Users = () => {
     localStorage.removeItem("authenticated");
 
     // 2️⃣ Redirect to login page
-    navigate("/login", { replace: true });
+    if (tenantSlug) {
+      navigate(`/${tenantSlug}/login`, { replace: true });
+    } else {
+      navigate("/login", { replace: true });
+    }
   };
 
 

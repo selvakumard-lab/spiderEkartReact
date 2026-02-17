@@ -20,5 +20,7 @@ app.use(
 
 app.use("/api/auth", require("./routes/auth.routes"));
 app.use("/api/tenants", require("./routes/tenant.routes"));
+app.use("/api/category", require("./routes/category.routes"));
+app.use("/api/subcategory", require("./routes/subcategory.routes"));
 
 module.exports = app;

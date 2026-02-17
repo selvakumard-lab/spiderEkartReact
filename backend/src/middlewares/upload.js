@@ -1,23 +1,59 @@
+// const multer = require("multer");
+// const path = require("path");
+// const fs = require("fs");
+
+// const uploadDir = path.join(__dirname, "..", "uploads", "projects");
+
+// // ✅ create folder if not exists
+// if (!fs.existsSync(uploadDir)) {
+//   fs.mkdirSync(uploadDir, { recursive: true });
+// }
+
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, uploadDir);
+//   },
+//   filename: (req, file, cb) => {
+//     const uniqueName =
+//       Date.now() + "-" + Math.round(Math.random() * 1e9);
+//     cb(null, uniqueName + path.extname(file.originalname));
+//   },
+// });
+
+// module.exports = multer({ storage });
+
+
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 
-const uploadDir = path.join(__dirname, "..", "uploads", "projects");
+// 🔥 dynamic storage creator
+const storage = (folderName) =>
+  multer.diskStorage({
+    destination: (req, file, cb) => {
 
-// ✅ create folder if not exists
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-}
+      const uploadDir = path.join(__dirname, "..", "uploads", folderName);
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, uploadDir);
-  },
-  filename: (req, file, cb) => {
-    const uniqueName =
-      Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, uniqueName + path.extname(file.originalname));
-  },
-});
+      // create folder automatically
+      if (!fs.existsSync(uploadDir)) {
+        fs.mkdirSync(uploadDir, { recursive: true });
+      }
 
-module.exports = multer({ storage });
+      cb(null, uploadDir);
+    },
+
+    filename: (req, file, cb) => {
+      const uniqueName =
+        Date.now() + "-" + Math.round(Math.random() * 1e9);
+
+      cb(null, uniqueName + path.extname(file.originalname));
+    },
+  });
+
+// 🔥 export function
+const upload = (folderName) =>
+  multer({
+    storage: storage(folderName),
+  });
+
+module.exports = upload;

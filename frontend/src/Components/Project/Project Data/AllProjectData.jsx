@@ -1,6 +1,6 @@
 import React,{  useContext, useEffect, useState } from 'react';
 import { Col, Progress, Row } from 'reactstrap';
-import { H6, LI, P, UL, Image } from '../../../AbstractElements';
+import { H6, P } from '../../../AbstractElements';
 // import { Comment, Done, Issues, Resolved } from '../../../Constant';
 // import ProjectAppContext from '../../../Helper/Project';
 // import {dynamicImage} from '../../../Services/index';

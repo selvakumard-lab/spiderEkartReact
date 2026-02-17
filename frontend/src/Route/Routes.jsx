@@ -2,6 +2,8 @@
 // dashbaord
 import Default from "../Components/Dashboard/Default/Default";
 import CategoryList from "../Components/Category";
+import CategoryOrder from "../Components/Category/categoryOrder";
+import SubCategoryList from "../Components/SubCategory";
 
 
 
@@ -149,8 +151,12 @@ export const routes = [
   // client
   { path: ":tenantSlug/dashboard/default", Component: <Default /> },
   { path: ":tenantSlug/category/categorylist", Component: <CategoryList /> },
-  { path: ":tenantSlug/category/categoryorder", Component: <ProductList /> },
-  { path: ":tenantSlug/subcategory/subcategorylist", Component: <ProductList /> },
+  { path: ":tenantSlug/category/categoryorder", Component: <CategoryOrder /> },
+  { path: ":tenantSlug/subcategory/subcategorylist", Component: <SubCategoryList /> },
+
+
+
+  
   { path: ":tenantSlug/brand", Component: <Lists /> },
   { path: ":tenantSlug/productRating", Component: <Rating /> },
   { path: ":tenantSlug/deliveryMethod", Component: <RadioCheckbox /> },

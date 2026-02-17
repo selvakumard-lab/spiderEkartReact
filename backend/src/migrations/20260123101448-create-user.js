@@ -18,6 +18,13 @@ module.exports = {
       password: {
         type: Sequelize.STRING
       },
+      otp: {
+        type: Sequelize.STRING
+      },
+      otp_expire: {
+        type: Sequelize.STRING
+      },
+      
       role: {
         type: Sequelize.STRING
       },

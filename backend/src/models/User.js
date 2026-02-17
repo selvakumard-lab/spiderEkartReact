@@ -16,6 +16,9 @@ module.exports = (sequelize, DataTypes) => {
           name: DataTypes.STRING,
           email: DataTypes.STRING,
           password: DataTypes.STRING,
+          otp: DataTypes.STRING,
+          otp_expire: DataTypes.STRING,
+          
           role: DataTypes.STRING,
           project_slug: DataTypes.STRING,
         });
@@ -30,6 +33,13 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
+    otp: DataTypes.STRING,
+    otp_expire: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+
+    
     role: DataTypes.STRING,
     project_slug: DataTypes.STRING
   }, {
