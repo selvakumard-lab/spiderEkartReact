@@ -4,8 +4,18 @@ import Default from "../Components/Dashboard/Default/Default";
 import CategoryList from "../Components/Category";
 import CategoryOrder from "../Components/Category/categoryOrder";
 import SubCategoryList from "../Components/SubCategory";
+import Brand from "../Components/Brand";
 
+import Rating from "../Components/Rating";
+import RadioCheckbox from "../Components/DeliveryMethod";
+import HomeBanner from "../Components/HomeBanner";
+import OfferBanner from "../Components/OfferBanner";
+import PromoCode from "../Components/PromoCode";
+import FeaturedSection from "../Components/FeaturedSection";
 
+import CustomerList from "../Components/Customer";
+import ManageCustomerWallet from "../Components/Customer/manageCustomerWallet.jsx";
+import LoyaltyPoint from "../Components/Customer/loyaltyPoint.jsx";
 
 
 
@@ -14,13 +24,15 @@ import CreateListContain from "../Components/Project/Create List";
 import ProductPage from "../Components/Eccommerce/ProductPage";
 import ProductList from "../Components/Eccommerce/ProductList";
 import WhishList from "../Components/Eccommerce/Wishlist";
-import RadioCheckbox from "../Components/Forms/Form Control/Radio Checkbox";
-import Lists from "../Components/UiKits/Lists";
+// import RadioCheckbox from "../Components/Forms/Form Control/Radio Checkbox";
+// import Rating from "../Components/BonusUi/Rating";
 
-import Rating from "../Components/BonusUi/Rating";
 
 import AddProductName from "../Components/Eccommerce/AddProduct";
 import PricingMembershipContain from "../Components/Eccommerce/PricingMemberShip";
+
+// import Lists from "../Components/UiKits/Lists";
+// import { Brand } from "../Constant";
 
 // import Ecommerce from "../Components/Dashboard/Ecommerce/Ecommerce";
 // import General from "../Components/Widgeta/General";
@@ -153,18 +165,28 @@ export const routes = [
   { path: ":tenantSlug/category/categorylist", Component: <CategoryList /> },
   { path: ":tenantSlug/category/categoryorder", Component: <CategoryOrder /> },
   { path: ":tenantSlug/subcategory/subcategorylist", Component: <SubCategoryList /> },
-
-
-
-  
-  { path: ":tenantSlug/brand", Component: <Lists /> },
+  { path: ":tenantSlug/brand", Component: <Brand /> },
   { path: ":tenantSlug/productRating", Component: <Rating /> },
   { path: ":tenantSlug/deliveryMethod", Component: <RadioCheckbox /> },
+  { path: ":tenantSlug/hameBanner", Component: <HomeBanner /> },
+  { path: ":tenantSlug/offerBanner", Component: <OfferBanner /> },
+  { path: ":tenantSlug/promoCode", Component: <PromoCode /> },
+  { path: ":tenantSlug/featuredSection", Component: <FeaturedSection /> },
+
+  { path: ":tenantSlug/customer/customerList", Component: <CustomerList /> },
+  { path: ":tenantSlug/customer/manage-customer-wallet", Component: <ManageCustomerWallet /> },
+  { path: ":tenantSlug/customer/loyaltypoint", Component: <LoyaltyPoint /> },
+  
+
 
   { path: ":tenantSlug/product/add-product", Component: <AddProductName /> },
   { path: ":tenantSlug/product/product-list", Component: <ProductList /> },
   { path: ":tenantSlug/product/productOrders", Component: <WhishList /> },
   { path: ":tenantSlug/product/bulk-edit-product", Component: <ProductPage /> },
+  
+  
+
+
   
   
   

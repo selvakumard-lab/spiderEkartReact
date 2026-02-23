@@ -98,8 +98,114 @@ export const TenantMENU = (slug) => [
         ],
       },
 
+
+      {
+        url: `/${slug}/hameBanner`,
+        icon: <Airplay />,
+        type: "link",
+        title: "Hame banner",
+      },
+
+      {
+        url: `/${slug}/offerBanner`,
+        icon: <Film />,
+        type: "link",
+        title: "Offers banner",
+      },
+
+      {
+        url: `/${slug}/promoCode`,
+        icon: <Zap />,
+        type: "link",
+        title: "Promo Code",
+      },
+
+      {
+        url: `/${slug}/featuredSection`,
+        icon: <Zap />,
+        type: "link",
+        title: "Featured Sections",
+      },
+
+
+
+
+      {
+        title: "Customers",
+        icon: <Users />,
+        type: "sub",
+        menu: [
+          {
+            url: `/${slug}/customer/customerList`,
+            title: "Customer List",
+            type: "link",
+          },
+          {
+            url: `/${slug}/customer/manage-customer-wallet`,
+            title: "Customer Wallet",
+            type: "link",
+          },
+          {
+            url: `/${slug}/customer/loyaltypoint`,
+            title: "Loyalty Point",
+            type: "link",
+          },
+          {
+            url: `/${slug}/customer/customer-refferal-report`,
+            title: "Customer Referral Report",
+            type: "link",
+          },
+
+        ],
+      },
       
 
+      {
+        url: `/${slug}/returnRequests`,
+        icon: <Airplay />,
+        type: "link",
+        title: "Return Requests",
+      },
+
+      {
+        title: "Delivery Boys",
+        icon: <Users />,
+        type: "sub",
+        menu: [
+          {
+            url: `/${slug}/deliveryboy/delivery-boys-list`,
+            title: "Delivery Boys List",
+            type: "link",
+          },
+          {
+            url: `/${slug}/deliveryboy/fund-transfers`,
+            title: "Fund Transfer",
+            type: "link",
+          },
+
+        ],
+      },
+
+      {
+        url: `/${slug}/notification`,
+        icon: <Radio />,
+        type: "link",
+        title: "Notifications",
+      },
+
+      {
+        url: `/${slug}/transaction`,
+        icon: <MessageCircle />,
+        type: "link",
+        title: "Transactions",
+      },
+
+      {
+        url: `/${slug}/wallet-transactions`,
+        icon: <GitPullRequest />,
+        type: "link",
+        title: "Wallet Transactions",
+      },
 
 
 

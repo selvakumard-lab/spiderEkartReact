@@ -92,25 +92,35 @@ exports.sendOtp = async (req, res) => {
     const expireTime = new Date(Date.now() + 5 * 60 * 1000); // 5 min
     let user = await User.findOne({ where: { email } });
 
-    if (!user) {
-      user = await User.create({
-        email,
-        otp,
-        otp_expire: expireTime,
-      });
-    } else {
+    if (user) {
       await user.update({
         otp,
         otp_expire: expireTime,
       });
+
+      res.json({
+        success: true,
+        message: "OTP sent successfully",
+      });
+    } else {
+      // user = await User.create({
+      //   email,
+      //   otp,
+      //   otp_expire: expireTime,
+      // });
+
+      res.json({
+        success: false,
+        message: "Email not found",
+      });
     }
 
-    await sendOtpMail(email, otp);
+    // await sendOtpMail(email, otp);
 
-    res.json({
-      success: true,
-      message: "OTP sent successfully",
-    });
+    // res.json({
+    //   success: true,
+    //   message: "OTP sent successfully",
+    // });
 
   } catch (err) {
     console.log(err);

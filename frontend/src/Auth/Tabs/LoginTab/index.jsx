@@ -164,18 +164,22 @@ const LoginTab = () => {
     e.preventDefault();
 
     if (!captchaToken)
-      return setError("Please verify you are not a robot");
+      setError("Please verify you are not a robot");
 
     try {
       setLoading(true);
       setError("");
 
-      await api.post("/auth/send-otp", {
+      const res = await api.post("/auth/send-otp", {
         email,
         captcha: captchaToken,
       });
 
-      setStep(2);
+      if(res.data.success){
+        setStep(2);
+      }else{
+        setError(res.data.message || "some went wrong");
+      }
 
     } catch (err) {
       setError(err.response?.data?.message || "Failed to send OTP");
@@ -219,12 +223,14 @@ const LoginTab = () => {
         />
       </div>
 
+      {error && <p className="text-danger">{error}</p>}
+
+
       <H4 className="mb-3">
         Sign In <span className="text-muted fs-6">| Email OTP Login</span>
       </H4>
 
 
-      {error && <p className="text-danger">{error}</p>}
 
       <FormGroup>
         <Label>Email Address</Label>
@@ -233,6 +239,7 @@ const LoginTab = () => {
           value={email}
           disabled={step === 2}
           onChange={(e) => setEmail(e.target.value)}
+          placeholder="Enter email"
           required
         />
       </FormGroup>

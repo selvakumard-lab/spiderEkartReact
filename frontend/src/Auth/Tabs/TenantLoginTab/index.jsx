@@ -177,19 +177,24 @@ const TenantLoginTab = () => {
     e.preventDefault();
 
     if (!captchaToken)
-      return setError("Please verify you are not a robot");
+      setError("Please verify you are not a robot");
 
     try {
       setLoading(true);
       setError("");
 
-      await api.post("/auth/send-otp", {
+      const res = await api.post("/auth/send-otp", {
         email,
         captcha: captchaToken,
         tenantSlug
       });
 
-      setStep(2);
+
+      if(res.data.success){
+        setStep(2);
+      }else{
+        setError(res.data.message || "some went wrong");
+      }
 
     } catch (err) {
       setError(err.response?.data?.message || "Failed to send OTP");
@@ -223,7 +228,7 @@ const TenantLoginTab = () => {
     }
   };
 
-  if (error) return <h2>{error}</h2>;
+  // if (error) return <h2>{error}</h2>;
   if (!tenant) return <h2>Loading...</h2>;
 
   return (
