@@ -28,6 +28,14 @@ app.use("/api/homebanner", require("./routes/homebanner.routes"));
 app.use("/api/offerbanner", require("./routes/offerbanner.routes"));
 app.use("/api/promocode", require("./routes/promocode.routes"));
 app.use("/api/featuredsection", require("./routes/featuredsection.routes"));
+app.use("/api/customer", require("./routes/customer.routes"));
+app.use("/api/deliveryboy", require("./routes/deliveryboy.routes"));
+app.use("/api/notification", require("./routes/notification.routes"));
+app.use("/api/settings", require("./routes/settings.routes"));
+
+
+
+
 
 
 

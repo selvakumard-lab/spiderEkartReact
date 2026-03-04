@@ -211,18 +211,18 @@ const SubCategory = () => {
             <div className="d-flex gap-3 action-icons">
 
             {/* EDIT */}
-            <i
-                className="icon-pencil-alt text-primary cursor-pointer"
-                title="Edit"
-                onClick={() => handleEdit(row)}
-            ></i>
+              <i
+                  className="icon-pencil-alt text-primary cursor-pointer"
+                  title="Edit"
+                  onClick={() => handleEdit(row)}
+              ></i>
 
-            {/* DELETE */}
-            <i
-                className="icon-trash text-danger cursor-pointer"
-                title="Delete"
-                onClick={() => handleDelete(row.id)}
-            ></i>
+              {/* DELETE */}
+              <i
+                  className="icon-trash text-danger cursor-pointer"
+                  title="Delete"
+                  onClick={() => handleDelete(row.id)}
+              ></i>
 
             </div>
         ),

@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import { Breadcrumbs, H4 } from "../../AbstractElements";
 import {
@@ -11,76 +11,115 @@ import {
   Input,
   Button,
   FormGroup,
-  Label
+  Label,
+  Spinner
 } from "reactstrap";
+import api from "../../Services/api";
+import { toast } from "react-toastify";
 
 const ManageCustomerWallet = () => {
 
-  /* ---------------- CUSTOMER DATA ---------------- */
-  const [customers, setCustomers] = useState([
-    { id: 1, name: "John Doe", email: "john@example.com", mobile: "9876543210", balance: 1200 },
-    { id: 2, name: "David Smith", email: "david@example.com", mobile: "9123456780", balance: 450 },
-    { id: 3, name: "Michael Johnson", email: "michael@example.com", mobile: "9988776655", balance: 3000 }
-  ]);
-
+  /* ---------------- STATE ---------------- */
+  const [customers, setCustomers] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [selectedCustomer, setSelectedCustomer] = useState(null);
 
-  /* -------- Wallet Form States -------- */
   const [walletType, setWalletType] = useState("credit");
   const [amount, setAmount] = useState("");
   const [message, setMessage] = useState("");
 
+  /* ---------------- FETCH CUSTOMERS ---------------- */
+  const fetchCustomers = async () => {
+    try {
+      setLoading(true);
+      const res = await api.get("/customer/list"); // backend API
+      setCustomers(res.data.customers);
+    } catch (error) {
+      toast.error("Failed to fetch customers");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchCustomers();
+  }, []);
+
   /* ---------------- FILTER ---------------- */
   const filteredData = customers.filter((item) =>
-    item.name.toLowerCase().includes(search.toLowerCase())
+    item.name?.toLowerCase().includes(search.toLowerCase())
   );
 
   /* -------- Single Row Selection -------- */
   const handleSelectedRowsChange = ({ selectedRows }) => {
-    setSelectedCustomer(selectedRows[0]); // single select
+    setSelectedCustomer(selectedRows[0]);
   };
 
   /* -------- Wallet Update Function -------- */
-  const handleWalletSubmit = () => {
-
+  const handleWalletSubmit = async () => {
     if (!selectedCustomer) {
-      alert("Please select a customer");
+      toast.error("Please select a customer");
+      return;
+    }
+
+    if (!walletType) {
+      toast.error("Please select wallet type");
       return;
     }
 
     if (!amount || amount <= 0) {
-      alert("Enter valid amount");
+      toast.error("Enter valid amount");
       return;
     }
 
-    const updatedCustomers = customers.map((cust) => {
-      if (cust.id === selectedCustomer.id) {
+    try {
+      const response = await api.post("/customer/update-wallet", {
+        customer_id: selectedCustomer.id,
+        type: walletType,
+        amount,
+        message,
+      });
 
-        let newBalance =
-          walletType === "credit"
-            ? cust.balance + Number(amount)
-            : cust.balance - Number(amount);
+      toast.success(response.data.message);
 
-        return { ...cust, balance: newBalance };
-      }
-      return cust;
-    });
+      // Refresh customers list from DB
+      fetchCustomers();
 
-    setCustomers(updatedCustomers);
+      // Reset form
+      setAmount("");
+      setMessage("");
+      setSelectedCustomer(null);
 
-    alert("Wallet updated successfully");
-
-    // Reset form
-    setAmount("");
-    setMessage("");
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Error updating wallet");
+    }
   };
 
   /* ---------------- TABLE COLUMNS ---------------- */
   const columns = [
-    { name: "ID", selector: row => row.id, width: "70px" },
-    { name: "Name", selector: row => row.name },
-    { name: "Balance (₹)", selector: row => row.balance },
+    {
+      name: "ID",
+      selector: (row) => row.id,
+      width: "80px",
+    },
+    {
+      name: "Name",
+      selector: (row) => row.name,
+    },
+    {
+      name: "Email",
+      selector: (row) => row.email,
+    },
+    {
+      name: "Mobile",
+      selector: (row) => row.mobile,
+    },
+    {
+      name: "Balance (₹)",
+      selector: (row) => row.wallet_balance,
+      sortable: true,
+    },
   ];
 
   return (
@@ -94,8 +133,8 @@ const ManageCustomerWallet = () => {
       <Container fluid>
         <Row>
 
-          {/* ================= LEFT SIDE - CUSTOMER LIST ================= */}
-          <Col sm="6">
+          {/* ================= LEFT SIDE ================= */}
+          <Col sm="7">
             <Card>
               <CardHeader>
                 <H4>Select Customer</H4>
@@ -111,25 +150,30 @@ const ManageCustomerWallet = () => {
                   className="mb-3"
                 />
 
-                <div className="table-responsive theme-scrollbar product-table">
+                {loading ? (
+                  <div className="text-center">
+                    <Spinner color="primary" />
+                  </div>
+                ) : (
+                  <div className="table-responsive theme-scrollbar product-table">
                     <DataTable
-                    columns={columns}
-                    data={filteredData}
-                    pagination
-                    selectableRows
-                    selectableRowsSingle   // ✅ Single Select Only
-                    onSelectedRowsChange={handleSelectedRowsChange}
-                    highlightOnHover
+                      columns={columns}
+                      data={filteredData}
+                      pagination
+                      selectableRows
+                      selectableRowsSingle
+                      onSelectedRowsChange={handleSelectedRowsChange}
+                      highlightOnHover
                     />
-                </div>
+                  </div>
+                )}
 
               </CardBody>
             </Card>
           </Col>
 
-
-          {/* ================= RIGHT SIDE - WALLET FORM ================= */}
-          <Col sm="6">
+          {/* ================= RIGHT SIDE ================= */}
+          <Col sm="5">
             <Card>
               <CardHeader>
                 <H4>Wallet Update</H4>
@@ -140,7 +184,10 @@ const ManageCustomerWallet = () => {
                 {selectedCustomer ? (
                   <>
                     <p><strong>Name:</strong> {selectedCustomer.name}</p>
-                    <p><strong>Current Balance:</strong> ₹ {selectedCustomer.balance}</p>
+                    <p>
+                      <strong>Current Balance:</strong> ₹{" "}
+                      {selectedCustomer.wallet_balance}
+                    </p>
 
                     <FormGroup>
                       <Label>Type</Label>
@@ -149,6 +196,7 @@ const ManageCustomerWallet = () => {
                         value={walletType}
                         onChange={(e) => setWalletType(e.target.value)}
                       >
+                        <option value="">Select Type</option>
                         <option value="credit">Credit</option>
                         <option value="debit">Debit</option>
                       </Input>

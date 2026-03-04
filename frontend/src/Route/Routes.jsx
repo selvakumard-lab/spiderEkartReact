@@ -16,6 +16,25 @@ import FeaturedSection from "../Components/FeaturedSection";
 import CustomerList from "../Components/Customer";
 import ManageCustomerWallet from "../Components/Customer/manageCustomerWallet.jsx";
 import LoyaltyPoint from "../Components/Customer/loyaltyPoint.jsx";
+import RefferalReport from "../Components/Customer/refferalReport.jsx";
+import ReturnRequest from "../Components/Customer/returnRequest.jsx";
+
+import DeliveryBoyList from "../Components/Deliveryboy";
+import FundTranfer from "../Components/Deliveryboy/fundTranfer.jsx";
+
+import Notification from "../Components/Notification";
+import Transaction from "../Components/Transaction";
+import WalletTransaction from "../Components/Transaction/walletTransaction.jsx";
+
+import Setting from "../Components/Setting";
+import PaymentMethodSetting from "../Components/Setting/paymentMethodSetting.jsx";
+import TimeSlot from "../Components/Setting/timeslot.jsx";
+import NotificationSetting from "../Components/Setting/notificationSetting.jsx";
+
+
+
+
+
 
 
 
@@ -176,6 +195,21 @@ export const routes = [
   { path: ":tenantSlug/customer/customerList", Component: <CustomerList /> },
   { path: ":tenantSlug/customer/manage-customer-wallet", Component: <ManageCustomerWallet /> },
   { path: ":tenantSlug/customer/loyaltypoint", Component: <LoyaltyPoint /> },
+  { path: ":tenantSlug/customer/customer-refferal-report", Component: <RefferalReport /> },
+  { path: ":tenantSlug/returnRequests", Component: <ReturnRequest /> },
+
+  { path: ":tenantSlug/deliveryboy/delivery-boys-list", Component: <DeliveryBoyList /> },
+  { path: ":tenantSlug/deliveryboy/fund-transfers", Component: <FundTranfer /> },
+  { path: ":tenantSlug/notification", Component: <Notification /> },
+  { path: ":tenantSlug/transaction", Component: <Transaction /> },
+  { path: ":tenantSlug/wallet-transactions", Component: <WalletTransaction /> },
+
+
+  { path: ":tenantSlug/settings", Component: <Setting /> },
+  { path: ":tenantSlug/payment-methods-setting", Component: <PaymentMethodSetting /> },
+  { path: ":tenantSlug/time-slots", Component: <TimeSlot /> },
+  { path: ":tenantSlug/notification-settings", Component: <NotificationSetting /> },
+  
   
 
 

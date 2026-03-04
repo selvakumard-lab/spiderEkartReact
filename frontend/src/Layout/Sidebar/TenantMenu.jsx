@@ -207,39 +207,73 @@ export const TenantMENU = (slug) => [
         title: "Wallet Transactions",
       },
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      // {
-      //   title: "Widgets",
-      //   icon: <Airplay />,
-      //   class: "lan-6",
-      //   menu: [
-      //     {
-      //       url: `/widgets/general`,
-      //       type: "link",
-      //       title: "General",
-      //     },
-      //     {
-      //       url: `/widgets/chart`,
-      //       type: "link",
-      //       title: "Chart",
-      //     },
-      //   ],
-      // },
+      {
+        title: "System",
+        icon: <Airplay />,
+        class: "lan-6",
+        menu: [
+          {
+            url: `/${slug}/settings`,
+            type: "link",
+            title: "Store Settings",
+          },
+          {
+            url: `/${slug}/payment-methods-setting`,
+            type: "link",
+            title: "Payment methods",
+          },
+          {
+            url: `/${slug}/time-slots`,
+            type: "link",
+            title: "Time Slots",
+          },
+          {
+            url: `/${slug}/notification-settings`,
+            type: "link",
+            title: "Notification Settings",
+          },
+          {
+            url: `/${slug}/contact-us`,
+            type: "link",
+            title: "Contact Us",
+          },
+          {
+            url: `/${slug}/about-us`,
+            type: "link",
+            title: "About Us",
+          },
+          
+        ],
+      },
       
+      {
+        url: `/${slug}/wallet-transactions`,
+        icon: <GitPullRequest />,
+        type: "link",
+        title: "Wallet Transactions",
+      },
+
+      {
+        url: `/${slug}/wallet-transactions`,
+        icon: <GitPullRequest />,
+        type: "link",
+        title: "Wallet Transactions",
+      },
+
+      {
+        url: `/${slug}/wallet-transactions`,
+        icon: <GitPullRequest />,
+        type: "link",
+        title: "Wallet Transactions",
+      },
+
+      {
+        url: `/${slug}/wallet-transactions`,
+        icon: <GitPullRequest />,
+        type: "link",
+        title: "Wallet Transactions",
+      },
+
       
     ],
   },
