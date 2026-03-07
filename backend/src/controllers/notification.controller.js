@@ -5,6 +5,44 @@ const fs = require("fs");
 const Notification = db.Notification;
 
 
+
+// exports.getNotifications = async (req, res) => {
+  
+//     const data = await Notification.findAll({
+//       order: [["id", "DESC"]]
+//     });
+
+//     res.status(200).json({
+//       success: true,
+//       data
+//     });
+
+// };
+
+exports.getNotifications = async (req, res) => {
+  try {
+
+    const data = await Notification.findAll({
+      order: [["id", "DESC"]],
+    });
+
+    res.status(200).json({
+      success: true,
+      data,
+    });
+
+  } catch (error) {
+
+    console.error("❌ Notification Query Error:", error);
+
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+
+  }
+};
+
 exports.addNotification = async (req, res) => {
 
 
@@ -44,59 +82,40 @@ exports.addNotification = async (req, res) => {
 
 };
 
-exports.getNotifications = async (req, res) => {
+
+
+
+
+
+exports.deleteNotification = async (req, res) => {
   try {
 
-    const data = await Notification.findAll({
-      order: [["id", "DESC"]]
-    });
+    const { id } = req.params;
+
+    const notification = await Notification.findByPk(id);
+
+    if (!notification) {
+      return res.status(404).json({
+        success: false,
+        message: "Notification not found",
+      });
+    }
+
+    await notification.destroy();
 
     res.status(200).json({
       success: true,
-      data
+      message: "Notification deleted successfully",
     });
 
   } catch (error) {
+
+    console.error("❌ Delete Notification Error:", error);
+
     res.status(500).json({
       success: false,
-      message: error.message
+      message: error.message,
     });
+
   }
 };
-
-
-
-
-// exports.deleteCategory = async (req, res) => {
-//   try {
-//     const { id } = req.params;
-
-//     const category = await Category.findByPk(id);
-
-//     if (!category) {
-//       return res.status(404).json({ message: "Category not found" });
-//     }
-
-//     // 🗑 Delete old image
-//     if (category.image) {
-//       const imagePath = path.join(
-//         __dirname,
-//         "../uploads/categories",
-//         category.image
-//       );
-
-//       if (fs.existsSync(imagePath)) {
-//         fs.unlinkSync(imagePath);
-//       }
-//     }
-
-//     // 🗑 Delete DB record
-//     await category.destroy();
-
-//     res.json({ message: "Category deleted successfully" });
-
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: "Delete failed" });
-//   }
-// };

@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
     }
 
   },{
-    tableName: "promocodes",
+    tableName: "notifications",
     timestamps: true,
     underscored: true,
   });

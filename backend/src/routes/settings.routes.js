@@ -34,4 +34,9 @@ router.delete("/timeslot/:id", settingController.deleteTimeSlot);
 router.get("/notification", settingController.getNotificationSettings);
 router.put("/notification", settingController.updateNotificationSettings);
 
+router.get("/cms", settingController.getCmsSettings);
+router.put("/cms", settingController.updateCmsSettings);
+
+
+
 module.exports = router;

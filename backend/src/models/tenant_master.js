@@ -6,6 +6,11 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // Example:
       // TenantMaster.hasMany(models.User, { foreignKey: 'tenant_id' });
+
+      TenantMaster.belongsTo(models.User, {
+        foreignKey: "user_id",
+        targetKey: "id"
+      });
     }
   }
 

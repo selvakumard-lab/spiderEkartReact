@@ -1,4 +1,4 @@
-import { Airplay, BarChart, Box, MessageCircle, CheckSquare, Clock, Cloud, Command, Edit, FileText, Film, FolderPlus, GitPullRequest, Heart, HelpCircle, Home, Image, Layers, List, Mail, Map, Package, Radio, Server, Sunrise, Users, Zap, ShoppingBag, Search } from "react-feather";
+import { BarChart3,MapPin,Airplay, BarChart, Box, MessageCircle, CheckSquare, Clock, Cloud, Command, Edit, FileText, Film, FolderPlus, GitPullRequest, Heart, HelpCircle, Home, Image, Layers, List, Mail, Map, Package, Radio, Server, Sunrise, Users, Zap, ShoppingBag, Search } from "react-feather";
 
 export const TenantMENU = (slug) => [
   {
@@ -233,47 +233,81 @@ export const TenantMENU = (slug) => [
             title: "Notification Settings",
           },
           {
-            url: `/${slug}/contact-us`,
+            url: `/${slug}/cms`,
             type: "link",
-            title: "Contact Us",
-          },
-          {
-            url: `/${slug}/about-us`,
-            type: "link",
-            title: "About Us",
+            title: "CMS",
           },
           
         ],
       },
-      
-      {
-        url: `/${slug}/wallet-transactions`,
-        icon: <GitPullRequest />,
-        type: "link",
-        title: "Wallet Transactions",
-      },
+
 
       {
-        url: `/${slug}/wallet-transactions`,
-        icon: <GitPullRequest />,
-        type: "link",
-        title: "Wallet Transactions",
+        title: "Location",
+        icon: <MapPin />,
+        class: "lan-6",
+        menu: [
+          {
+            url: `/${slug}/state`,
+            type: "link",
+            title: "States",
+          },
+          {
+            url: `/${slug}/district`,
+            type: "link",
+            title: "Districts",
+          },
+          {
+            url: `/${slug}/city`,
+            type: "link",
+            title: "Cities",
+          },
+          {
+            url: `/${slug}/area`,
+            type: "link",
+            title: "Areas",
+          },
+        
+        ],
       },
+
 
       {
-        url: `/${slug}/wallet-transactions`,
-        icon: <GitPullRequest />,
-        type: "link",
-        title: "Wallet Transactions",
+        title: "Reports",
+        icon: <BarChart3 />,
+        class: "lan-6",
+        menu: [
+          {
+            url: `/${slug}/sales-report`,
+            type: "link",
+            title: "Sales Report",
+          },
+          {
+            url: `/${slug}/invoice-report`,
+            type: "link",
+            title: "Invoice Reports",
+          },
+          {
+            url: `/${slug}/high-buying-customer`,
+            type: "link",
+            title: "High Buying Customers Report",
+          },
+          {
+            url: `/${slug}/high-sell-products`,
+            type: "link",
+            title: "Highest Selling Products Report",
+          },
+        
+        ],
       },
+
 
       {
-        url: `/${slug}/wallet-transactions`,
-        icon: <GitPullRequest />,
+        url: `/${slug}/faq`,
+        icon: <HelpCircle />,
         type: "link",
-        title: "Wallet Transactions",
+        title: "FAQ",
       },
-
       
     ],
   },

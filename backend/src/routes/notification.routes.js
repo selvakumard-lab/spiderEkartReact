@@ -4,11 +4,12 @@ const upload = require("../middlewares/upload");
 const notificationController = require("../controllers/notification.controller");
 
 
-router.post("/send",upload("notifications").single("image"),notificationController.addNotification);
-
 router.get("/", notificationController.getNotifications);
 
-// router.delete("/:id", notificationController.deleteCategory);
+router.post("/send",upload("notifications").single("image"),notificationController.addNotification);
+
+
+router.delete("/:id", notificationController.deleteNotification);
 
 
 

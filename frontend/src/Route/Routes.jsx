@@ -30,6 +30,15 @@ import Setting from "../Components/Setting";
 import PaymentMethodSetting from "../Components/Setting/paymentMethodSetting.jsx";
 import TimeSlot from "../Components/Setting/timeslot.jsx";
 import NotificationSetting from "../Components/Setting/notificationSetting.jsx";
+import CmsSettings from "../Components/Setting/cmsSetting.jsx";
+
+import StateLocation from "../Components/Location";
+import DistrictLocation from "../Components/Location/district.jsx";
+import CityLocation from "../Components/Location/city.jsx";
+import AreaLocation from "../Components/Location/area.jsx";
+
+
+
 
 
 
@@ -209,6 +218,18 @@ export const routes = [
   { path: ":tenantSlug/payment-methods-setting", Component: <PaymentMethodSetting /> },
   { path: ":tenantSlug/time-slots", Component: <TimeSlot /> },
   { path: ":tenantSlug/notification-settings", Component: <NotificationSetting /> },
+  { path: ":tenantSlug/cms", Component: <CmsSettings  /> },
+
+
+  { path: ":tenantSlug/state", Component: <StateLocation  /> },
+  { path: ":tenantSlug/district", Component: <DistrictLocation  /> },
+  { path: ":tenantSlug/city", Component: <CityLocation  /> },
+  { path: ":tenantSlug/area", Component: <AreaLocation  /> },
+  
+  
+  
+
+  
   
   
 

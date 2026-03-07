@@ -126,6 +126,25 @@ module.exports = {
       loginWithSmsOtp: {
         type: Sequelize.BOOLEAN
       },
+
+      about_us: {
+        type: Sequelize.STRING
+      },
+      contact_us: {
+        type: Sequelize.STRING
+      },
+      terms_conditions: {
+        type: Sequelize.STRING
+      },
+      privacy_policy: {
+        type: Sequelize.STRING
+      },
+      refund_policy: {
+        type: Sequelize.STRING
+      },
+
+      
+
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

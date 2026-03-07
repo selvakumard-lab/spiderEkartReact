@@ -257,3 +257,52 @@ exports.updateNotificationSettings = async (req, res) => {
     res.status(500).json({ message: "Server Error" });
   }
 };
+
+
+exports.getCmsSettings = async (req, res) => {
+  try {
+    const setting = await Setting.findOne();
+
+    res.json({
+      about_us: setting?.about_us || "",
+      contact_us: setting?.contact_us || "",
+      terms_conditions: setting?.terms_conditions || "",
+      privacy_policy: setting?.privacy_policy || "",
+      refund_policy: setting?.refund_policy || "",
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+exports.updateCmsSettings = async (req, res) => {
+  try {
+    const {
+      about_us,
+      contact_us,
+      terms_conditions,
+      privacy_policy,
+      refund_policy,
+    } = req.body;
+
+    const setting = await Setting.findOne();
+
+    if (setting) {
+      await setting.update({
+        about_us,
+        contact_us,
+        terms_conditions,
+        privacy_policy,
+        refund_policy,
+      });
+    }
+
+    res.json({
+      message: "CMS Settings Updated Successfully",
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+

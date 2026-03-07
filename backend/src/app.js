@@ -33,6 +33,16 @@ app.use("/api/deliveryboy", require("./routes/deliveryboy.routes"));
 app.use("/api/notification", require("./routes/notification.routes"));
 app.use("/api/settings", require("./routes/settings.routes"));
 
+app.use("/api/state", require("./routes/state.routes"));
+app.use("/api/district", require("./routes/district.routes"));
+app.use("/api/city", require("./routes/city.routes"));
+app.use("/api/area", require("./routes/area.routes"));
+
+
+
+
+
+
 
 
 

@@ -100,6 +100,28 @@ const Notification = () => {
     });
   };
 
+  const deleteNotification = async (id) => {
+
+    if (!window.confirm("Are you sure you want to delete this notification?")) {
+      return;
+    }
+
+    try {
+
+      await api.delete(`/notification/${id}`);
+
+      toast.success("Notification deleted successfully");
+
+      fetchNotifications();
+
+    } catch (error) {
+
+      toast.error("Delete failed");
+
+    }
+
+  };
+
   /* ---------------- TABLE ---------------- */
   const columns = [
     { name: "ID", selector: r => r.id, width: "70px" },
@@ -120,7 +142,17 @@ const Notification = () => {
           "No Image"
         )
     },
-    { name: "Date", selector: r => r.createdAt }
+    { name: "Date", selector: r => r.createdAt },
+    {
+      name: "Action",
+      cell: row => (
+        <i
+          className="icon-trash text-danger cursor-pointer"
+          title="Delete"
+          onClick={() => deleteNotification(row.id)}
+        ></i>
+      )
+    }
   ];
 
   /* ---------------- UI ---------------- */
@@ -264,12 +296,14 @@ const Notification = () => {
                 <H4>Notification History</H4>
               </CardHeader>
               <CardBody>
+                <div className="table-responsive theme-scrollbar product-table">
                 <DataTable
                   columns={columns}
                   data={notifications}
                   pagination
                   highlightOnHover
                 />
+                </div>
               </CardBody>
             </Card>
           </Col>

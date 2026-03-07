@@ -53,7 +53,12 @@ module.exports = (sequelize, DataTypes) => {
     smtpHost: DataTypes.STRING,
     smtpSecure: DataTypes.STRING,
     smtpPort: DataTypes.INTEGER,
-    loginWithSmsOtp: DataTypes.BOOLEAN
+    loginWithSmsOtp: DataTypes.BOOLEAN,
+    about_us: DataTypes.STRING,
+    contact_us: DataTypes.STRING,
+    terms_conditions: DataTypes.STRING,
+    privacy_policy: DataTypes.STRING,
+    refund_policy: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Setting',

@@ -133,7 +133,18 @@ exports.verifyOtp = async (req, res) => {
   try {
     const { email, otp } = req.body;
 
-    const user = await User.findOne({ where: { email } });
+    // const user = await User.findOne({ where: { email } });
+
+
+    const user = await User.findOne({
+      where: { email },
+      include: [
+        {
+          model: db.TenantMaster,
+          attributes: ["project_image"]
+        }
+      ]
+    });
 
     if (!user || !user.otp)
       return res.status(400).json({ message: "Invalid OTP" });
