@@ -1,4 +1,4 @@
-import { BarChart3,MapPin,Airplay, BarChart, Box, MessageCircle, CheckSquare, Clock, Cloud, Command, Edit, FileText, Film, FolderPlus, GitPullRequest, Heart, HelpCircle, Home, Image, Layers, List, Mail, Map, Package, Radio, Server, Sunrise, Users, Zap, ShoppingBag, Search } from "react-feather";
+import { MapPin,Airplay, BarChart, Box, MessageCircle, CheckSquare, Clock, Cloud, Command, Edit, FileText, Film, FolderPlus, GitPullRequest, Heart, HelpCircle, Home, Image, Layers, List, Mail, Map, Package, Radio, Server, Sunrise, Users, Zap, ShoppingBag, Search } from "react-feather";
 
 export const TenantMENU = (slug) => [
   {
@@ -274,7 +274,7 @@ export const TenantMENU = (slug) => [
 
       {
         title: "Reports",
-        icon: <BarChart3 />,
+        icon: <BarChart />,
         class: "lan-6",
         menu: [
           {

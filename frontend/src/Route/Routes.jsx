@@ -39,6 +39,12 @@ import AreaLocation from "../Components/Location/area.jsx";
 
 
 
+import SampleCard from "../Components/SampleCard";
+
+import FAQContent from "../Components/FAQ";
+
+
+
 
 
 
@@ -225,12 +231,19 @@ export const routes = [
   { path: ":tenantSlug/district", Component: <DistrictLocation  /> },
   { path: ":tenantSlug/city", Component: <CityLocation  /> },
   { path: ":tenantSlug/area", Component: <AreaLocation  /> },
-  
-  
+
+  { path: ":tenantSlug/sales-report", Component: <SampleCard  /> },
+  { path: ":tenantSlug/invoice-report", Component: <SampleCard  /> },
+  { path: ":tenantSlug/high-buying-customer", Component: <SampleCard  /> },
+  { path: ":tenantSlug/high-sell-products", Component: <SampleCard  /> },
+
+
+  { path: ":tenantSlug/faq", Component: <FAQContent  /> },
   
 
   
   
+
   
 
 

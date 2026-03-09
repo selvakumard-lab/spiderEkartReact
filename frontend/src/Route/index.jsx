@@ -49,6 +49,7 @@ import Loader from "../Layout/Loader";
 import LayoutRoutes from "../Route/LayoutRoutes";
 import { authRoutes } from "./AuthRoutes";
 import PrivateRoute from "./PrivateRoute";
+import WebsiteHome from "../Website/Home";
 
 const Routers = () => {
   return (
@@ -57,7 +58,10 @@ const Routers = () => {
         <Routes>
 
           {/* FIRST OPEN → LOGIN */}
-          <Route path="/" element={<Navigate to="/login" replace />} />
+          {/* <Route path="/" element={<Navigate to="/login" replace />} /> */}
+
+          {/* WEBSITE HOME PAGE */}
+          <Route path="/" element={<WebsiteHome />} />
 
           {/* PUBLIC LOGIN */}
           <Route path="/login" element={<Signin />} />
