@@ -38,16 +38,7 @@ app.use("/api/district", require("./routes/district.routes"));
 app.use("/api/city", require("./routes/city.routes"));
 app.use("/api/area", require("./routes/area.routes"));
 
-
-
-
-
-
-
-
-
-
-
+app.use("/api/faq", require("./routes/faq.routes"));
 
 
 
