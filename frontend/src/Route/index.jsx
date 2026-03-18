@@ -42,8 +42,11 @@
 
 
 import React, { Suspense } from "react";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import Signin from "../Auth/Signin";
+import { BrowserRouter, Route, Routes,Navigate } from "react-router-dom";
+// import Signin from "../Auth/Signin";
+
+import Signin from "../Components/Pages/Auth/LoginOne";
+
 import TenantLogin from "../Auth/TenantLogin";
 import Loader from "../Layout/Loader";
 import LayoutRoutes from "../Route/LayoutRoutes";
@@ -58,10 +61,13 @@ const Routers = () => {
         <Routes>
 
           {/* FIRST OPEN → LOGIN */}
-          {/* <Route path="/" element={<Navigate to="/login" replace />} /> */}
+          <Route path="/" element={<Navigate to="/login" replace />} />
 
           {/* WEBSITE HOME PAGE */}
-          <Route path="/" element={<WebsiteHome />} />
+          {/* <Route path="/" element={<WebsiteHome />} /> */}
+          
+
+          <Route path="/:tenantSlug/" element={<WebsiteHome />} />
 
           {/* PUBLIC LOGIN */}
           <Route path="/login" element={<Signin />} />

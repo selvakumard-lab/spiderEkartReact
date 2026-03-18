@@ -36,6 +36,16 @@ exports.getHomeBanner = async (req, res) => {
   res.json({ success: true, data });
 };
 
+exports.getWebHomeBanner = async (req, res) => {
+  const data = await HomeBanner.findAll({
+      where: { slider_type: "web" },
+      order: [["id", "DESC"]]
+    });
+  res.json({ success: true, data });
+};
+
+
+
 
 exports.updateHomeBanner = async (req, res) => {
   try {

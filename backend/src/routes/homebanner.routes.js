@@ -7,6 +7,8 @@ router.post("/",upload("homebanner").single("image"),homeBannerController.addHom
 
 router.get("/", homeBannerController.getHomeBanner);
 
+router.get("/web", homeBannerController.getWebHomeBanner);
+
 router.put("/:id", upload("homebanner").single("image"), homeBannerController.updateHomeBanner);
 
 router.delete("/:id", homeBannerController.deleteHomeBanner);

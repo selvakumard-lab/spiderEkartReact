@@ -172,3 +172,34 @@ exports.deleteSubCategory = async (req, res) => {
     res.status(500).json({ message: "Delete failed" });
   }
 };
+
+
+
+exports.getSubCategoryByCategory = async (req, res) => {
+
+  try {
+
+    const category_id = req.params.id;
+
+    const data = await SubCategory.findAll({
+      where: {
+        category_id: category_id
+      },
+      attributes: ["id", "name"]
+    });
+
+    res.status(200).json({
+      success: true,
+      data: data
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+
+  }
+
+};

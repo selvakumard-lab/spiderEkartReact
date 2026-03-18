@@ -131,9 +131,11 @@
 
 
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Form, FormGroup, Input, Label } from "reactstrap";
-import { Btn, H4 } from "../../../AbstractElements";
+import { Btn, H4, P,H6,UL,LI } from "../../../AbstractElements";
+import { Facebook, Instagram, Linkedin, Twitter } from 'react-feather';
+import { EmailAddress, ForgotPassword, Signinaccount, RememberPassword } from '../../../Constant';
 import api from "../../../Services/api";
 
 const TenantLoginTab = () => {
@@ -150,18 +152,27 @@ const TenantLoginTab = () => {
   const [error, setError] = useState("");
   const captchaRef = useRef(null);
   
-  useEffect(() => {
-    const timer = setInterval(() => {
-      if (window.grecaptcha && captchaRef.current && step === 1) {
-        window.grecaptcha.render(captchaRef.current, {
-          sitekey: "6LcjmW4sAAAAALJeT2ue0Pt_huYrxTj7u8PTVJS2",
-          callback: (token) => setCaptchaToken(token),
-        });
-        clearInterval(timer);
-      }
-    }, 500);
-    return () => clearInterval(timer);
-  }, [step]);
+  const captchaWidgetId = useRef(null);
+  
+      useEffect(() => {
+      const timer = setInterval(() => {
+          if (
+          window.grecaptcha &&
+          captchaRef.current &&
+          step === 1 &&
+          captchaWidgetId.current === null
+          ) {
+          captchaWidgetId.current = window.grecaptcha.render(captchaRef.current, {
+              sitekey: "6LcjmW4sAAAAALJeT2ue0Pt_huYrxTj7u8PTVJS2",
+              callback: (token) => setCaptchaToken(token),
+          });
+  
+          clearInterval(timer);
+          }
+      }, 500);
+  
+      return () => clearInterval(timer);
+      }, [step]);
     
   window.onCaptchaSuccess = function (token) {
     setCaptchaToken(token);
@@ -229,69 +240,179 @@ const TenantLoginTab = () => {
   };
 
   // if (error) return <h2>{error}</h2>;
-  if (!tenant) return <h2>Loading...</h2>;
+  if (!tenant) {
+    return (
+      <div className="d-flex vh-100 justify-content-center align-items-center">
+        <div className="text-center">
+          <h1 style={{fontSize:"60px"}}>404</h1>
+          <h3>Domain Not Found</h3>
+          <p>The website you are trying to access does not exist.</p>
+        </div>
+      </div>
+    );
+  }
+
+  // return (
+  //   <Form className="theme-form" onSubmit={step === 1 ? sendOtp : verifyOtp}>
+
+  //     {/* Tenant Logo */}
+  //     <img
+  //       src={`http://localhost:5000/${tenant.project_image}`}
+  //       alt="logo"
+  //       width="100%"
+  //       className="mb-3"
+  //     />
+
+  //     <H4 className="mb-3">
+  //       Sign In <span className="text-muted fs-6">| Email OTP Login</span>
+  //     </H4>
+
+  //     {error && <p className="text-danger">{error}</p>}
+
+  //     {/* EMAIL */}
+  //     <FormGroup>
+  //       <Label>Email Address</Label>
+  //       <Input
+  //         type="email"
+  //         value={email}
+  //         disabled={step === 2}
+  //         onChange={(e) => setEmail(e.target.value)}
+  //         placeholder="Enter email"
+  //         required
+  //       />
+  //     </FormGroup>
+
+  //     {/* CAPTCHA */}
+  //     {step === 1 && (
+  //       <div className="mb-3">
+  //         <div ref={captchaRef}></div>
+  //       </div>
+  //     )}
+
+  //     {/* OTP */}
+  //     {step === 2 && (
+  //       <FormGroup>
+  //         <Label>Enter OTP</Label>
+  //         <Input
+  //           type="text"
+  //           value={otp}
+  //           onChange={(e) => setOtp(e.target.value)}
+  //           placeholder="Enter 6 digit OTP"
+  //           required
+  //         />
+  //       </FormGroup>
+  //     )}
+
+  //     <Btn attrBtn={{ color: "primary", className: "w-100", disabled: loading }}>
+  //       {loading
+  //         ? "Please wait..."
+  //         : step === 1
+  //         ? "Send OTP"
+  //         : "Verify & Login"}
+  //     </Btn>
+
+  //   </Form>
+  // );
+
+
 
   return (
-    <Form className="theme-form" onSubmit={step === 1 ? sendOtp : verifyOtp}>
-
-      {/* Tenant Logo */}
-      <img
-        src={`http://localhost:5000/${tenant.project_image}`}
-        alt="logo"
-        width="100%"
-        className="mb-3"
-      />
-
-      <H4 className="mb-3">
-        Sign In <span className="text-muted fs-6">| Email OTP Login</span>
-      </H4>
-
-      {error && <p className="text-danger">{error}</p>}
-
-      {/* EMAIL */}
-      <FormGroup>
-        <Label>Email Address</Label>
-        <Input
-          type="email"
-          value={email}
-          disabled={step === 2}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Enter email"
-          required
-        />
-      </FormGroup>
-
-      {/* CAPTCHA */}
-      {step === 1 && (
-        <div className="mb-3">
-          <div ref={captchaRef}></div>
-        </div>
-      )}
-
-      {/* OTP */}
-      {step === 2 && (
-        <FormGroup>
-          <Label>Enter OTP</Label>
-          <Input
-            type="text"
-            value={otp}
-            onChange={(e) => setOtp(e.target.value)}
-            placeholder="Enter 6 digit OTP"
-            required
-          />
-        </FormGroup>
-      )}
-
-      <Btn attrBtn={{ color: "primary", className: "w-100", disabled: loading }}>
-        {loading
-          ? "Please wait..."
-          : step === 1
-          ? "Send OTP"
-          : "Verify & Login"}
-      </Btn>
-
-    </Form>
-  );
+              <div className="login-main">
+              <Form className="theme-form login-form" onSubmit={step === 1 ? sendOtp : verifyOtp}>
+                  <div className="login-header text-center">
+                      <H4>{Signinaccount}</H4>
+                      <P>Enter your email & OTP to login</P>
+                  </div>
+  
+                  
+  
+                  <FormGroup>
+                      <Label>{EmailAddress}</Label>
+                      <div className="input-group">
+                          <Input
+                            type="email"
+                            value={email}
+                            disabled={step === 2}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="Enter email"
+                            required
+                          />
+                      </div>
+                  </FormGroup>
+  
+                  {step === 1 && (
+                      <div className="mb-3">
+                          <div ref={captchaRef}></div>
+                      </div>
+                  )}
+  
+                  {/* OTP FIELD */}
+                        {step === 2 && (
+                          <FormGroup>
+                            <Label>Enter OTP</Label>
+                            <Input
+                              type="text"
+                              value={otp}
+                              onChange={(e) => setOtp(e.target.value)}
+                              placeholder="Enter 6 digit OTP"
+                              required
+                            />
+                          </FormGroup>
+                        )}
+                  <FormGroup className='position-relative'>
+                      <div className="checkbox">
+                          <Input id="checkbox1" type="checkbox" />
+                          <Label className="text-muted" for="checkbox1">{RememberPassword}</Label>
+                      </div>
+                      <Link to={`${process.env.PUBLIC_URL}/authentication/forget-pwd`} className="link">
+                          {ForgotPassword}?
+                      </Link>
+                  </FormGroup>
+                  {error && <p className="text-danger">{error}</p>}
+                  <FormGroup>
+                      <Btn attrBtn={{ color: "primary", className: "w-100", disabled: loading }}>
+                              {loading
+                                ? "Please wait..."
+                                : step === 1
+                                ? "Get Login Code"
+                                : "Verify & Login"}
+                            </Btn>
+                  </FormGroup>
+                  <div className="login-social-title">
+                      <H6>Or Sign in with</H6>
+                  </div>
+                  <FormGroup>
+                      <UL attrUL={{ className: 'simple-list login-social flex-row' }}>
+                          <LI>
+                              <a href="https://in.linkedin.com/">
+                                 <Linkedin/>
+                              </a>
+                          </LI>
+                          <LI>
+                              <a href="https://twitter.com/i/flow/login">
+                                 <Twitter/>
+                              </a>
+                          </LI>
+                          <LI>
+                              <a href="https://www.instagram.com/">
+                                  <Instagram/>
+                              </a>
+                          </LI>
+                          <LI>
+                              <a href="https://www.facebook.com/">
+                              <Facebook/>
+                              </a>
+                          </LI>
+                      </UL>
+                  </FormGroup>
+                  {/* <P attrPara={{ className: 'text-center mt-4 mb-0' }}>Don't have account?
+                      <Link to={`${process.env.PUBLIC_URL}/authentication/create-pwd`} className="ms-2">
+                          {CreateAccount}
+                      </Link>
+                  </P> */}
+              </Form>
+              </div>
+      );
 };
 
 export default TenantLoginTab;

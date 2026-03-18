@@ -41,5 +41,7 @@ app.use("/api/area", require("./routes/area.routes"));
 app.use("/api/faq", require("./routes/faq.routes"));
 
 
+app.use("/api/product",require("./routes/product.routes.js"));
+
 
 module.exports = app;

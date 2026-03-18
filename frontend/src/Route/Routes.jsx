@@ -45,21 +45,25 @@ import FAQContent from "../Components/FAQ";
 
 
 
+import AddProduct from "../Components/Product/index.jsx";
+import ProductList from "../Components/Product/productlist.jsx";
+
+
 
 
 
 import Project from "../Components/Project";
 import CreateListContain from "../Components/Project/Create List";
 import ProductPage from "../Components/Eccommerce/ProductPage";
-import ProductList from "../Components/Eccommerce/ProductList";
+// import ProductList from "../Components/Eccommerce/ProductList";
 import WhishList from "../Components/Eccommerce/Wishlist";
 // import RadioCheckbox from "../Components/Forms/Form Control/Radio Checkbox";
 // import Rating from "../Components/BonusUi/Rating";
 
 
-import AddProductName from "../Components/Eccommerce/AddProduct";
 import PricingMembershipContain from "../Components/Eccommerce/PricingMemberShip";
 
+// import AddProductName from "../Components/Eccommerce/AddProduct";
 // import Lists from "../Components/UiKits/Lists";
 // import { Brand } from "../Constant";
 
@@ -242,7 +246,7 @@ export const routes = [
   
 
 
-  { path: ":tenantSlug/product/add-product", Component: <AddProductName /> },
+  { path: ":tenantSlug/product/add-product", Component: <AddProduct /> },
   { path: ":tenantSlug/product/product-list", Component: <ProductList /> },
   { path: ":tenantSlug/product/productOrders", Component: <WhishList /> },
   { path: ":tenantSlug/product/bulk-edit-product", Component: <ProductPage /> },

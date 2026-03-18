@@ -13,4 +13,7 @@ router.put("/:id", upload("subcategories").single("image"), subCategoryControlle
 router.delete("/:id", subCategoryController.deleteSubCategory);
 
 
+router.get("/:id", subCategoryController.getSubCategoryByCategory);
+
+
 module.exports = router;
